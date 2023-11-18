@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Coupens</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/imgs/theme}">
+    <!-- Template CSS -->
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css" />
+    <!-- Include Bootstrap 3 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+</head>
+
+<body>
+<div class="screen-overlay"></div>
+<div th:replace="~{fragment::sidebar}">
+
+</div>
+<main class="main-wrap">
+    <div th:replace="~{fragment::main-nav}">
+
+    </div>
+    <section class="content-main">
+        <div class="content-header">
+            <div>
+                <h2 class="content-title card-title">Coupens</h2>
+                <p>Add, edit or delete a coupen</p>
+            </div>
+            <div>
+                <a type="button" class="btn btn-primary btn-sm rounded"  th:href="@{/addCoupen}">Create new</a>
+
+
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+
+
+
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Coupen Code</th>
+                                    <th>Offer Percentage</th>
+                                    <th>Start Date</th>
+                                    <th>Minimum Order Amount</th>
+                                    <th>MAximum Offer Price</th>
+                                    <th>available coupen</th>
+                                    <th>Expire Date</th>
+                                    <th>Update</th>
+                                    <th>Action</th>
+
+
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="coupenData: ${coupens}" >
+                                    <td>
+                                    <span class="badge badge-pill badge-soft-success" th:if="${coupenData.enabled==true && coupenData.isExpired()==false}">Active</span>
+                                    <span class="badge badge-pill badge-soft-danger" th:if="${coupenData.enabled==false && coupenData.isExpired()==false}">Blocked </span>
+                                    <span class="badge badge-pill badge-soft-pink" th:if="${coupenData.isExpired()==true}">Expired</span>
+                                    </td>
+                                    <td th:text="${coupenData.coupencode}"></td>
+                                    <td th:text="${coupenData.offerPercentage}"></td>
+                                    <td th:text="${coupenData.startDate}"></td>
+                                    <td th:text="${coupenData.minimumOrderAmount}"></td>
+                                    <td th:text="${coupenData.maximumOfferAmount}"></td>
+                                    <td th:text="${coupenData.count}"></td>
+                                    <td th:text="${coupenData.expireDate}"></td>
+                                    <td><a class="btn btn-danger" th:href="@{/editCoupen(coupenId=${coupenData.id})}">Edit</a></td>
+                                    <td>
+                                        <a class="btn"  th:if="${coupenData.enabled==true && coupenData.isExpired()==false}"
+                                        th:href="@{/disableCoupen(coupenId=${coupenData.id})}">Disable </a>
+                                        <a class="btn"  th:if="${coupenData.enabled==false && coupenData.isExpired()==false}"
+                                        th:href="@{/enableCoupen(coupenId=${coupenData.id})}">Enable </a>
+                                    </td>
+
+
+                                </tr>
+
+
+
+
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> <!-- .col// -->
+                </div> <!-- .row // -->
+            </div> <!-- card body .// -->
+        </div> <!-- card .// -->
+        <!-- Add category-->
+
+
+    </section> <!-- content-main end// -->
+    <div th:replace="~{fragment::footer}">
+
+    </div>
+</main>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Coupen</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row">
+
+
+
+                            <div class="col-md-10">
+
+
+
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragment::script}">
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

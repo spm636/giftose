@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment::head">
+
+</head>
+<body>
+<div th:replace="fragment::nav-head">
+
+</div>
+<main class="main">
+    <section class="pt-150 pb-150 d-flex justify-content-center">
+        <div class="col-md-8 ">
+            <div class="tab-content dashboard-content">
+                <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0" >Hello </h5>
+                        </div>
+                        <div class="card-body">
+                            <p>Your order is success fully submited</p>
+                        </div>
+                    </div>
+                    <div class="mt-20 pl20">
+                    <a class="btn" th:href="@{/shop}">Continue shoping</a>
+                        <a class="btn" th:href="@{/order}">See Order Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+<div th:replace="fragment::footer"></div>
+<div th:replace="fragment::scipt"></div>
+
+</body>
+</html>

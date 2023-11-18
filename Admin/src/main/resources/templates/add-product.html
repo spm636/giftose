@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>add Product</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/imgs/theme/.svg}">
+    <!-- Template CSS -->
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="screen-overlay"></div>
+<div th:replace="~{fragment::sidebar}">
+
+</div>
+<main class="main-wrap">
+    <div th:replace="~{fragment::main-nav}"></div>
+    <section class="content-main">
+        <div class="row">
+            <div class="col-9">
+                <div class="content-header">
+                    <h2 class="content-title">Add New Product</h2>
+                    <div>
+                        <!-- <button class="btn btn-light rounded font-sm mr-5 text-body hover-up">Save to draft</button>
+                         <button class="btn btn-md rounded font-sm hover-up">Publich</button> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Product Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/saveProduct}" th:object="${product}"  method="post" enctype="multipart/form-data" >
+                            <div class="mb-4">
+
+                                <input type="hidden" th:field="*{id}" class="form-control" >
+                            </div>
+                            <div class="mb-4">
+                                <label for="product_name" class="form-label">Product title</label>
+                                <input type="text" th:field="*{name}" placeholder="Type here" class="form-control" id="product_name" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Full description</label>
+                                <textarea th:field="*{description}" placeholder="Type here" class="form-control" rows="4" required></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-4">
+                                        <label class="form-label">Cost Price</label>
+                                        <div class="row gx-2">
+                                            <input th:field="*{costPrice}"  type="number" class="form-control" required="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="mb-4">
+                                        <label class="form-label">Quantity</label>
+                                        <input th:field="*{currentQuantity}"  type="number" class="form-control" required=" ">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-4">
+                                        <label class="form-label">Product Color</label>
+                                        <input th:field="*{productColor}" name="productColor" type="text" class="form-control" required=" ">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="input-upload">
+                                    <input th:field="*{imagesUrl}"  name="imagesUrl"  class="form-control"  type="file" accept="image/jpeg, image/png, image/jpg, image/webp, image/svg, image/**" multiple required="" min="1" max="3">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <label class="form-label">Category</label>
+                                <select th:field="*{category}" class="form-select">
+                                    <option th:value="null"> select</option>
+                                    <option th:each="categories :${category}"
+                                            th:value="${categories.id}"
+                                            th:text="${categories.name}"
+                                    ></option>
+
+                                </select>
+                                <div th:if="${param.exist}">
+                                    <div class="alert alert-danger">Product name already exist !</div>
+                                </div>
+                                <div class="card-body">
+                                    <button type="submit" class="btn-info">Save</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div> <!-- card end// -->
+
+
+
+
+
+            </div>
+        </div>
+    </section> <!-- content-main end// -->
+    <div th:replace="~{fragment::footer}">
+
+    </div>
+</main>
+<div th:replace="~{fragment::script}">
+
+</div>
+</body>
+
+</html>

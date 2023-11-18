@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Offer</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/imgs/theme}">
+    <!-- Template CSS -->
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css" />
+    <!-- Include Bootstrap 3 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+</head>
+
+<body>
+<div class="screen-overlay"></div>
+<div th:replace="~{fragment::sidebar}">
+
+</div>
+<main class="main-wrap">
+    <div th:replace="~{fragment::main-nav}">
+
+    </div>
+    <section class="content-main">
+        <div class="content-header">
+            <div>
+                <h2 class="content-title card-title">Offer</h2>
+                <p>Add, edit or delete a offer</p>
+            </div>
+            <div>
+                <a  class="btn btn-primary btn-sm rounded" th:href="@{/productOffer}" >Create Product Offer</a>
+                <a  class="btn btn-primary btn-sm rounded" th:href="@{/categoryOffer}">Create Category Offer</a>
+
+
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+
+
+
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Product Name</th>
+                                    <th>Offer</th>
+                                    <th>Description</th>
+                                    <th>type</th>
+                                    <th>Offer Percentage</th>
+
+                                    <th>Update</th>
+                                    <th>Action</th>
+
+
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr th:each="offer1: ${offers}" >
+                                    <td>
+                                        <span class="badge badge-pill badge-soft-success" th:if="${offer1.active==true}">Active</span>
+                                        <span class="badge badge-pill badge-soft-danger" th:if="${offer1.active==false} ">Blocked </span>
+
+
+                                    </td>
+                                    <td> <span th:text="${offer1.product?.name}"></span>
+                                        <span th:text="${offer1.category?.name}"></span>
+                                    </td>
+
+                                    <td th:text="${offer1.offerName}"></td>
+                                    <td th:text="${offer1.descriprion}"></td>
+                                    <td th:text="${offer1.offerType}"></td>
+                                    <td th:text="${offer1.offerPercentage}"></td>
+
+                                    <td>
+                                        <a class="btn btn-danger" th:href="@{/editOffer(offerId=${offer1.id})}">Edit</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn"  th:if="${offer1.active==true}"
+                                           th:href="@{/disableOffer(offerId=${offer1.id})}">Remove Offer </a>
+                                        <a class="btn"  th:if="${offer1.active==false}"
+                                           th:href="@{/enableOffer(offerId=${offer1.id})}">Apply Offer </a>
+
+                                    </td>
+
+
+                                </tr>
+
+
+
+
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> <!-- .col// -->
+                </div> <!-- .row // -->
+            </div> <!-- card body .// -->
+        </div> <!-- card .// -->
+        <!-- Add category-->
+
+
+    </section> <!-- content-main end// -->
+    <div th:replace="~{fragment::footer}">
+
+    </div>
+</main>
+
+<!--Category Offer-->
+
+
+
+<div th:replace="~{fragment::script}">
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

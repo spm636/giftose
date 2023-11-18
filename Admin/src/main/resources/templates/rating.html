@@ -1,0 +1,23 @@
+
+<html>
+<head>
+    <title>Bootstrap star rating example</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Bootstrap star rating example</h2>
+    <form action="#" method="post">
+        <label for="ratinginput" class="control-label">Give rating for the product:</label>
+        <input id="ratinginput" name="rating" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1" value="2">
+        <input type="submit" name="Submit"/>
+    </form>
+</div>
+<script>
+    $("#ratinginput").rating();
+</script>
+</body>
+</html>

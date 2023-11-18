@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Product</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/imgs/theme}">
+    <!-- Template CSS -->
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="screen-overlay"></div>
+<div th:replace="~{fragment::sidebar}">
+
+</div>
+<main class="main-wrap">
+    <div th:replace="~{fragment::main-nav}">
+
+    </div>
+    <section class="content-main">
+        <div class="content-header">
+            <div>
+                <h2 class="content-title card-title">Reviews</h2>
+                <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <div>
+                <a href="#" class="btn btn-light rounded font-md">Export</a>
+                <a href="#" class="btn btn-light rounded  font-md">Import</a>
+                <a th:href="@{/addProduct}" class="btn btn-primary btn-sm rounded">Create new</a>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <header class="card-header">
+                <div class="row gx-3">
+                    <div class="col-lg-4 col-md-6 me-auto">
+                        <input type="text" placeholder="Search..." class="form-control" />
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-6">
+                        <select class="form-select">
+                            <option>Status</option>
+                            <option>Active</option>
+                            <option>Disabled</option>
+                            <option>Show all</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-6">
+                        <select class="form-select">
+                            <option>Show 20</option>
+                            <option>Show 30</option>
+                            <option>Show 40</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+            <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+
+
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Rating</th>
+
+                        <th class="text-end">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="products:${product}">
+
+
+                        <td> <img th:if="${not #lists.isEmpty(products.imagesUrl)}"
+                                  th:src="@{'/productImages/' + ${products.imagesUrl[0]}}"
+                                  style="width: 40px; height: 40px;"></td>
+                        <td><b th:text="${products.name}"></b></td>
+
+                        <td>
+                            <ul class="rating-stars">
+                                <li style="width: 60%;" class="stars-active">
+                                    <img src="assets/imgs/icons/stars-active.svg" alt="stars" />
+                                </li>
+                                <li>
+                                    <img src="assets/imgs/icons/starts-disable.svg" alt="stars" />
+                                </li>
+                            </ul>
+                        </td>
+
+                        <td class="text-end">
+                            <a th:href="@{/showProductReview(productId=${products.id})}" class="btn btn-md rounded font-sm">Show Review</a>
+                            <!--
+                            <div class="dropdown">
+                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">View detail</a>
+                                    <a class="dropdown-item" href="#">Edit info</a>
+                                    <a class="dropdown-item text-danger" href="#">Delete</a>
+                                </div>
+                            </div> --> <!-- dropdown //end -->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="pagination-area mt-30 mb-50">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-start">
+                    <li class="page-item " th:if="${currentPage!=0}"><a class="page-link"  th:href="@{'/review/'+ ${currentPage-1}}"><<</a></li>
+                    <li class="page-item" th:classappend="${currentPage == i-1 ?'active':''}" th:each="i:${#numbers.sequence(1,totalPage)}">
+                        <a class="page-link" th:href="@{'/review/'+${i-1}}"> <span th:text="${i}"></span></a></li>
+                    <li class="page-item" th:if="${currentPage+1 !=totalPage}"><a class="page-link" th:href="@{'/review/'+ ${currentPage+1}}">>> </a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </section> <!-- content-main end// -->
+    <div th:replace="~{fragment::footer}">
+
+    </div>
+</main>
+<div th:replace="~{fragment::script}">
+
+</div>
+</body>
+
+</html>

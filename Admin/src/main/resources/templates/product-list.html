@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Product</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/imgs/theme}">
+    <!-- Template CSS -->
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="screen-overlay"></div>
+<div th:replace="~{fragment::sidebar}">
+
+</div>
+<main class="main-wrap">
+    <div th:replace="~{fragment::main-nav}">
+
+    </div>
+    <section class="content-main">
+        <div class="content-header">
+            <div>
+                <h2 class="content-title card-title">Products List</h2>
+                <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <div>
+                <a href="#" class="btn btn-light rounded font-md">Export</a>
+                <a href="#" class="btn btn-light rounded  font-md">Import</a>
+                <a th:href="@{/addProduct}" class="btn btn-primary btn-sm rounded">Create new</a>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <header class="card-header">
+                <div class="row align-items-center">
+                    <div class="col col-check flex-grow-0">
+                        <div class="form-check ms-2">
+                            <input class="form-check-input" type="checkbox" value="">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6 me-auto mb-md-0 mb-3">
+
+
+                                <form th:action="@{/searchProduct}" method="GET">
+                                <input type="text" name="key" placeholder="Search..." class="form-control">
+                                </form>
+
+
+
+                    </div>
+                    <div class="col-lg-3 col-6 me-auto mb-md-0 mb-3">
+                    <a class="btn btn-primary" th:href="@{/productList/0}">All Product</a>
+                    </div>
+
+                        <form th:action="@{/searchCategory}" th:object="${categories1}" method="get">
+                            <div class="col-lg-6 col-md-6 ms-auto text-md-end">
+                        <select class="form-select d-inline-block mb-lg-0 mb-15 mw-200" th:field="*{name}">
+                            <option selected th:value="null">Select Category</option>
+                            <option th:each="categories :${category}" th:text="${categories.name}" th:value="${categories.name}"></option>
+
+                        </select>
+                            <input type="submit" value="GET" class="btn btn-primary">
+                            </div>
+                        </form>
+
+                </div>
+            </header> <!-- card-header end// -->
+            <div class="card-body">
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>CostPrice</th>
+                            <th>SalePrice</th>
+                            <th>Colour</th>
+                            <th>Category</th>
+                            <th>update</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="products : ${product}">
+
+
+                            <td>
+
+
+
+
+                                <img th:if="${not #lists.isEmpty(products.imagesUrl)}"
+                                     th:src="@{'/productImages/' + ${products.imagesUrl[0]}}"
+                                     style="width: 40px; height: 40px;">
+                            </td>
+
+                            <td th:text="${products.name}"></td>
+                            <td th:text="${products.description}"></td>
+                            <td th:text="${products.currentQuantity}"></td>
+                            <td th:text="${products.costPrice}"></td>
+                            <td th:text="${products.salePrice}"></td>
+                            <td th:text="${products.productColor}"></td>
+                            <td th:text="${products.category?.name}"></td>
+
+
+
+                            <td>
+                                <a id="editButton"
+                                   th:href="@{/updateProduct(productId = ${products.id})}"
+                                   class="btn btn-primary">Update</a> </td>
+                            <td>   <a th:if="${products._deleted} == true" th:href="@{/enable-product(productId =${products.id})}"
+                                      class="btn btn-primary">Enable</a>
+                                <a th:if="${products._deleted} == false" th:href="@{/delete-product(productId =${products.id})}"
+                                   class=" btn btn-danger" onclick="if (!confirm('Are you sure want to disable this product'))return false ">Disable</a>
+                            </td>
+                            <td><b></b></td>
+
+
+                        </tr>
+
+
+
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+
+
+            </div> <!-- card-body end// -->
+        </div> <!-- card end// -->
+        <div class="pagination-area mt-30 mb-50">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-start">
+                    <li class="page-item " th:if="${currentPage!=0}"><a class="page-link"  th:href="@{'/productList/'+ ${currentPage-1}}"><<</a></li>
+                    <li class="page-item" th:classappend="${currentPage == i-1 ?'active':''}" th:each="i:${#numbers.sequence(1,totalPage)}">
+                    <a class="page-link" th:href="@{'/productList/'+${i-1}}"> <span th:text="${i}"></span></a></li>
+                    <li class="page-item" th:if="${currentPage+1 !=totalPage}"><a class="page-link" th:href="@{'/productList/'+ ${currentPage+1}}">>> </a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </section> <!-- content-main end// -->
+    <div th:replace="~{fragment::footer}">
+
+    </div>
+</main>
+<div th:replace="~{fragment::script}">
+
+</div>
+</body>
+
+</html>

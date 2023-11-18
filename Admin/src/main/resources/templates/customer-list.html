@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>cusomer Details</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/imgs/theme/}">
+    <!-- Template CSS -->
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="screen-overlay"></div>
+<div th:replace="~{fragment::sidebar}">
+
+</div>
+<main class="main-wrap">
+    <div th:replace="~{fragment::main-nav}">
+
+    </div>
+    <section class="content-main">
+        <div class="content-header">
+            <div>
+                <h2 class="content-title card-title">Customers </h2>
+                <p>Add, edit or delete a category</p>
+            </div>
+            <div>
+                <input type="text" placeholder="Search Categories" class="form-control bg-white">
+            </div>
+        </div>
+        <div class="container">
+
+            <h3 class="mt-3">User Directory</h3>
+            <hr>
+            <!-- <a th:href="@{/home/addForm}" class="btn btn-primary mb-3">Add User</a>
+             <a th:href="@{/home/admin}" class="btn btn-primary mb-3">Show User</a>
+
+             <form th:action="@{/home/search}" method="get">
+                 Search: <input type="text" name="name" id="keyword" size="50"  required />
+
+                 &nbsp;
+                 <input type="submit" value="Search"  class="btn btn-primary"/>
+                 &nbsp;
+                   <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
+             </form>-->
+
+
+            <table class="table table-bordered table-striped mt-3">
+                <thead class="table-dark">
+                <tr>
+
+                    <th> Name</th>
+                    <th>email</th>
+                    <th>Mobile</th>
+
+
+                    <th>Password</th>
+
+                    <th>Action</th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+
+
+
+                <tr  th:each="tempUserDetails : ${users}" th:class="${tempUserDetails.blocked} ? 'blocked-row' : ''">
+
+                    <td th:text="${tempUserDetails.name}" />
+                    <td th:text="${tempUserDetails.email}" />
+                    <td th:text="${tempUserDetails.mobile}"></td>
+                    <td th:text="${tempUserDetails.password}"></td>
+
+                    <td>
+                        <a th:if="${tempUserDetails.blocked} == true" th:href="@{/enable-customer(customerID =${tempUserDetails.customer_id})}"
+                           class="btn btn-primary">Unblock</a>
+                        <a th:if="${tempUserDetails.blocked} == false" th:href="@{/block-customer(customerID =${tempUserDetails.customer_id})}"
+                           class=" btn btn-danger" onclick="if (!confirm('Are you sure want to block this customer'))return false ">Block</a>
+                    </td>
+                    <!--<td>
+
+                        <a class="btn btn-info btn-sm"
+                           th:href="@{/home/userShowUpdate(userID=${tempUserDetails.id})}">
+                            Edit
+                        </a>
+                        <a class="btn btn-danger btn-sm"
+                           th:href="@{/home/delete(userID=${tempUserDetails.id})}"
+                           onclick="if (!confirm('Are you sure want to delete this User'))return false ">
+                            Delete
+                        </a>
+                    </td> -->
+
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </section>
+    <div th:replace="~{fragment::footer}">
+
+    </div>
+
+
+</main>
+<div th:replace="~{fragment::script}">
+
+</div>
+
+
+</body>
+</html>
+
+
+

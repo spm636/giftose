@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>OrderDetails</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/imgs/theme}">
+    <!-- Template CSS -->
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css" />
+    <!-- Include Bootstrap 3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+<div class="screen-overlay"></div>
+<div th:replace="~{fragment::sidebar}">
+
+</div>
+<main class="main-wrap">
+    <div th:replace="~{fragment::main-nav}">
+
+    </div>
+
+
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Order List </h2>
+                    <p>Lorem ipsum dolor sit amet.</p>
+                </div>
+                <div>
+                    <div class="row end">
+                    <form th:action="@{/pdfReport}" th:object="${report}" method="get">
+
+                            <select class="form-select d-inline-block mb-lg-0 mb-15 mw-200" th:field="*{pdfReport}">
+                                <option selected th:value="null">Select Report</option>
+                                <option th:value="daily">DailyReport</option>
+                                <option th:value="weekly">Weekly Report</option>
+                                <option th:value="monthly">Monthly report</option>
+
+
+                            </select>
+                            <input type="submit" value="Report PDF" class="btn btn-primary">
+                    </form>
+                    <form th:action="@{/csvReport}" th:object="${report}" method="get">
+
+                        <select class="form-select d-inline-block mb-lg-0 mb-15 mw-200" th:field="*{csvReport}">
+                            <option selected th:value="null">Select Report</option>
+                            <option th:value="daily">DailyReport</option>
+                            <option th:value="weekly">Weekly Report</option>
+                            <option th:value="monthly">Monthly report</option>
+
+
+                        </select>
+                        <input type="submit" value="Report CSV" class="btn btn-primary">
+                    </form>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <header class="card-header">
+                    <div class="row gx-3">
+                        <div class="col-lg-4 col-md-4 me-auto">
+                          <!--  <input type="text" placeholder="Search..." class="form-control">-->
+                        </div>
+                        <div class="row class="col-lg-4 col-md-4 me-auto"">
+                        <form th:action="@{/orderStatus/0}" th:object="${report}">
+
+                            <select class="form-select d-inline-block mb-lg-0 mb-15 mw-200" th:field="*{orderStatus}">
+                                <option th:value="null">Status</option>
+                                <option th:value="Cancel">Cancel</option>
+                                <option th:value="Pending">Pending</option>
+                                <option th:value="Shipped">Shipped</option>
+                                <option th:value="Delivered">Delivered</option>
+                                <option value="Return Pending">Return Pending</option>
+                                <option value="Return Accept">Return Accept</option>
+                            </select>
+                            <input  type="submit" value="GET">
+
+                        </form>
+                        </div>
+
+
+                </header> <!-- card-header end// -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>#ID</th>
+                                <th scope="col">Name</th>
+
+
+                                <th scope="col">Total</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Payment Method</th>
+                                <th scope="col" class="text-end"> Action </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="orderDetails: ${orders}">
+                                <td th:text="${orderDetails.id}"></td>
+                                <td th:text="${orderDetails.customer.name}"><b></b></td>
+
+
+                                <td th:text="${orderDetails.grandTotelPrize}">$</td>
+                                <td>
+                                <p th:if="${orderDetails.orderStatus}==Pending"><span th:text="${orderDetails.orderStatus}" class="btn btn-warning"></span></p>
+                                <p th:if="${orderDetails.orderStatus}==Cancel"><span th:text="${orderDetails.orderStatus}" class="btn btn-danger"></span></p>
+                                <p th:if="${orderDetails.orderStatus=='Return Accept'}"><span th:text="${orderDetails.orderStatus}" class="btn btn-success"></span></p>
+                                <p th:if="${orderDetails.orderStatus}==Delivered"><span th:text="${orderDetails.orderStatus}" class="btn btn-info"></span></p>
+                                    <p th:if="${orderDetails.orderStatus=='Return Pending'}"><span th:text="${orderDetails.orderStatus}" class="btn btn-warning"></span></p>
+                                    <p th:if="${orderDetails.orderStatus}==Shipped"><span th:text="${orderDetails.orderStatus}" class="btn btn-primary"></span></p>
+
+                                </td>
+
+                                <td th:text="${orderDetails.orderDate}"></td>
+                                <td th:text="${orderDetails.paymentMethod}"></td>
+
+                                <td class="text-end">
+                                    <a th:href="@{/orderDetailsInfo(orderId=${orderDetails.id})}" class="btn btn-md rounded font-sm">Detail</a>
+
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li th:if="${currentPage!=0}" class="page-item"><a th:href="@{'/orderDetails/'+ ${currentPage-1}}" class="page-link" href="#">Previous</a></li>
+
+                                <li th:classappend="${currentPage == i-1 ?'active':''}" th:each="i:${#numbers.sequence(1,totalPage)}" class="page-item">
+                                    <a class="page-link" href="#" th:href="@{'/orderDetails/'+${i-1}}">
+                                    <span th:text="${i}"></span>
+                                </a></li>
+
+                                <li th:if="${currentPage+1 !=totalPage}" class="page-item"><a th:href="@{'/orderDetails/'+ ${currentPage+1}}" class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                </section>
+                                <div th:replace="~{fragment::footer}">
+
+                                </div>
+                            </main>
+                            <div th:replace="~{fragment::script}">
+
+                            </div>
+                            </body>
+                            </html>
