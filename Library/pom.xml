@@ -96,14 +96,14 @@
 <!--                </configuration>-->
 <!--            </plugin> -->
 
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <version>3.11.0</version> <!-- Use the version that supports Java 21 -->
-                        <configuration>
-                            <release>17</release> <!-- Set the Java version you want to target -->
-                        </configuration>
-                    </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version> <!-- Use the version that supports Java 21 -->
+                <configuration>
+                    <release>17</release> <!-- Set the Java version you want to target -->
+                </configuration>
+            </plugin>
 
 
         </plugins>
