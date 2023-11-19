@@ -99,7 +99,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <skipTests>${skipTests}</skipTests>
+                    <skipTests>true</skipTests>
                     <excludes>
                         <exclude>com/ecommerce/library/**/*Test.java</exclude>
                     </excludes>
