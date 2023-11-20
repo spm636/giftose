@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragment::head">
+<head th:replace="~{fragment::head}">
 
 </head>
 <body>
-<div th:replace="fragment::nav-head">
+<div th:replace="~{fragment::nav-head}">
 
 </div> <main class="main">
     <div class="page-header breadcrumb-wrap">
@@ -185,8 +185,8 @@
 
 
 
-<div th:replace="fragment::footer"></div>
-<div th:replace="fragment::scipt"></div>
+<div th:replace="~{fragment::footer}"></div>
+<div th:replace="~{fragment::scipt}"></div>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 

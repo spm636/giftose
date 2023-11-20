@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragment::head">
+<head th:replace="~{fragment::head}">
 
 </head>
 <body>
-<div th:replace="fragment::nav-head"></div>
+<div th:replace="~{fragment::nav-head}"></div>
 
 <div class="col-md-8 mx-auto">
     <div class="container mt-100 ">
@@ -61,9 +61,9 @@
     </div>
 </div>
 
-<div th:replace="fragment::footer">
+<div th:replace="~{fragment::footer}">
 </div>
-<div th:replace="fragment::scipt"></div>
+<div th:replace="~{fragment::scipt}"></div>
 
 </body>
 </html>
