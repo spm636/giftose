@@ -72,7 +72,7 @@ public class HomeControl {
         List<Category> categories=categoryService.findAllByActivatedTrue();
         model.addAttribute("category",categories);
 
-        return "/shop";
+        return "shop";
     }
 
 
@@ -114,12 +114,12 @@ public class HomeControl {
         {
             walletService.addToRefundAmount(id);
         }
-        return "redirect:/order";
+        return "redirect:/order?pageNo=0";
     }
     @GetMapping("/returnOrder")
     public String showReturnOrder(@ModelAttribute("orderId") Long id){
         orderService.returnOrder(id);
-        return "redirect:/order";
+        return "redirect:/order?pageNo=0";
     }
     @PostMapping("/changePassword")
     public String showChangePassword(@ModelAttribute("customer") Customer customer){
