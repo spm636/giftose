@@ -46,7 +46,7 @@
                                 <td class="image product-thumbnail"><img th:if="${not #lists.isEmpty(cart.product.imagesUrl)}"
                                                                          th:src="@{'/productImages/' + ${cart.product.imagesUrl[0]}}" alt="#"></td>
                                 <td class="product-des product-name">
-                                    <h5 class="product-name" th:text="${cart.product.name}"><a href="shop-product-right.html" ></a></h5>
+                                    <h5 class="product-name" th:text="${cart.product.name}"><a></a></h5>
                                     <p class="font-xs">
                                     </p>
                                 </td>
