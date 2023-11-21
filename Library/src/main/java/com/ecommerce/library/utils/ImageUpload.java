@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Component
 public class ImageUpload {
-    private final String IMAGE_UPLOAD_FOLDER =System.getProperty("user.dir") +  "/Library/src/main/resources/static/productImages";
+    private final String IMAGE_UPLOAD_FOLDER =System.getProperty("user.dir") +  "/home/ubuntu/giftose/Library/src/main/resources/static/productImages";
 
 
     public @NotNull List<String> uploadToLocalAndReadyImages(List<MultipartFile> multipartFiles) {
