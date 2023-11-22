@@ -34,9 +34,9 @@
                                     <div class="product-img product-img-zoom">
                                         <a th:href="@{/productDetails(productId=${products.id})}">
                                             <img class="default-img" th:if="${not #lists.isEmpty(products.imagesUrl)}"
-                                                 th:src="@{'/productImages/' + ${products.imagesUrl[0]}}" alt="">
+                                                 th:src="@{'/Images-product/' + ${products.imagesUrl[0]}}" alt="">
                                             <img class="default-img" th:if="${not #lists.isEmpty(products.imagesUrl)}"
-                                                 th:src="@{'/productImages/' + ${products.imagesUrl[1]}}" alt="">
+                                                 th:src="@{'/Images-product/' + ${products.imagesUrl[1]}}" alt="">
 
 
                                         </a>

@@ -30,26 +30,26 @@
                                     <div class="product-image-slider">
                                         <figure class="border-radius-10">
                                             <img th:if="${not #lists.isEmpty(product.imagesUrl)}"
-                                                 th:src="@{'/productImages/' + ${product.imagesUrl[0]}}" alt="product image">
+                                                 th:src="@{'/Images-product/' + ${product.imagesUrl[0]}}" alt="product image">
                                         </figure>
                                         <figure class="border-radius-10">
                                             <img th:if="${not #lists.isEmpty(product.imagesUrl)}"
-                                                 th:src="@{'/productImages/' + ${product.imagesUrl[1]}}" alt="product image">
+                                                 th:src="@{'/Images-product/' + ${product.imagesUrl[1]}}" alt="product image">
                                         </figure>
                                         <figure class="border-radius-10">
                                             <img th:if="${not #lists.isEmpty(product.imagesUrl)}"
-                                                 th:src="@{'/productImages/' + ${product.imagesUrl[1]}}" alt="product image">
+                                                 th:src="@{'/Images-product/' + ${product.imagesUrl[1]}}" alt="product image">
                                         </figure>
 
                                     </div>
                                     <!-- THUMBNAILS -->
                                     <div class="slider-nav-thumbnails pl-15 pr-15">
                                         <div><img th:if="${not #lists.isEmpty(product.imagesUrl)}"
-                                                  th:src="@{'/productImages/' + ${product.imagesUrl[0]}}" alt="product image"></div>
+                                                  th:src="@{'/Images-product/' + ${product.imagesUrl[0]}}" alt="product image"></div>
                                         <div><img th:if="${not #lists.isEmpty(product.imagesUrl)}"
-                                                  th:src="@{'/productImages/' + ${product.imagesUrl[1]}}" alt="product image"></div>
+                                                  th:src="@{'/Images-product/' + ${product.imagesUrl[1]}}" alt="product image"></div>
                                         <div><img th:if="${not #lists.isEmpty(product.imagesUrl)}"
-                                                  th:src="@{'/productImages/' + ${product.imagesUrl[1]}}" alt="product image"></div>
+                                                  th:src="@{'/Images-product/' + ${product.imagesUrl[1]}}" alt="product image"></div>
 
                                     </div>
                                 </div>
