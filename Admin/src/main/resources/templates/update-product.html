@@ -85,9 +85,10 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <img th:if="${not #lists.isEmpty(product.imagesUrl)}"
-                                         th:src="@{'/productImages/' + ${product.imagesUrl[0]}}"
+                                         th:src="@{'/home/ubuntu/giftose/Images-product/' + ${product.imagesUrl[0]}}"
                                          style="width: 80px; height: 80px;">
                                 </div>
+
                             </div>
                             <div class="col-sm-6 mb-3">
                                 <label class="form-label">Category</label>
