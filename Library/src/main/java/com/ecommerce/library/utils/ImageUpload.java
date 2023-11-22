@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Component
 public class ImageUpload {
-    private final String IMAGE_UPLOAD_FOLDER ="/home/ubuntu/giftose/productImages";
+    private final String IMAGE_UPLOAD_FOLDER ="/home/ubuntu/giftose/Images-product";
 
 
     public @NotNull List<String> uploadToLocalAndReadyImages(List<MultipartFile> multipartFiles) {
