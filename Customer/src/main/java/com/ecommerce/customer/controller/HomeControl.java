@@ -5,7 +5,10 @@ import com.ecommerce.library.dto.ProductDto;
 import com.ecommerce.library.dto.ReviewDto;
 import com.ecommerce.library.model.*;
 import com.ecommerce.library.service.*;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -149,8 +152,10 @@ public class HomeControl {
         return "shop";
     }
 
-
-
-
-
 }
+
+
+
+
+
+
